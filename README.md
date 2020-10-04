@@ -1,6 +1,14 @@
 # OSU_CS321H
 CS 321 / Honors Introduction to Theory of Computation / Fall 2020 / Oregon State
 
+# JFLAP
+
+To use JFLAP, simply install Java, and run
+
+```bash
+java -jar JFLAP7.1.jar
+```
+
 # JFLAP License
 
 This use is acceptable under clause `I`
