@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
+	<type>grammar</type>
+	<!--The list of productions.-->
+	<production>
+		<left>S</left>
+		<right>aB</right>
+	</production>
+	<production>
+		<left>A</left>
+		<right/>
+	</production>
+	<production>
+		<left>C</left>
+		<right>bD</right>
+	</production>
+	<production>
+		<left>B</left>
+		<right>bC</right>
+	</production>
+	<production>
+		<left>D</left>
+		<right>bA</right>
+	</production>
+	<production>
+		<left>B</left>
+		<right>bB</right>
+	</production>
+	<production>
+		<left>D</left>
+		<right>aD</right>
+	</production>
+</structure>
