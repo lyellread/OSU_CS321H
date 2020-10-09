@@ -3,6 +3,10 @@
 	<!--The list of productions.-->
 	<production>
 		<left>S</left>
+		<right>bC</right>
+	</production>
+	<production>
+		<left>S</left>
 		<right>aB</right>
 	</production>
 	<production>
@@ -10,16 +14,16 @@
 		<right/>
 	</production>
 	<production>
-		<left>C</left>
-		<right>bD</right>
-	</production>
-	<production>
 		<left>B</left>
-		<right>bC</right>
+		<right>A</right>
 	</production>
 	<production>
 		<left>D</left>
 		<right>bA</right>
+	</production>
+	<production>
+		<left>C</left>
+		<right>bD</right>
 	</production>
 	<production>
 		<left>B</left>
