@@ -2,47 +2,25 @@
 
 ## Python: `password_acceptor.py`
 
-Requires: 
-```
-python3
-```
+Requires: `python3`
 
-Run:
-```sh
-./password_acceptor
-```
+Run: `./password_acceptor`
 
 ## Bash Script: `email_acceptor.sh`
 
-Run:
-```sh
-./email_acceptor.sh <email>
-```
+Run:`./email_acceptor.sh <email>`
 
 ## C: `full_name_acceptor.c`
 
-Requires:
-```sh
-gcc
-[make]
-```
+Requires:`gcc, [make]`
 
-Compile:
-```sh
-make
-```
+Compile:`make`
 
-Run:
-```sh
-./full_name_acceptor
-```
+Run:`./full_name_acceptor`
 
 # Run Tests
 
-Requires:
-```sh
-make
-```
+Requires: `make`
 
 ## All
 
