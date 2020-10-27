@@ -2,7 +2,7 @@ all:
 	gcc -o full_name_acceptor -Werror full_name_acceptor.c
 
 clean:
-	rm full_name_acceptor
+	-rm full_name_acceptor
 
 test: test_py test_sh test_c
 	echo "Tested All Targets."
