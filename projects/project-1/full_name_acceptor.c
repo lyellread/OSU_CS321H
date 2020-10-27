@@ -24,15 +24,18 @@ int main(){
 	- ([[:space:]](Jr\\.|I{1,3}|Sr\\.))? : matches either one or zero of {Jr., Sr., I, II, III}
 	*/
 
+	// Compile our regex string
 	ret = regcomp(&regex, regex_string, REG_EXTENDED);
 	if (ret){
 		puts("Error Compiling Regex");
 		exit(1);
 	}
 
+	// Get user input
 	puts("Please enter your full name:");
 	fgets(input, 100, stdin);
 
+	// Execute the regex we compiled against input
 	ret = regexec(&regex, input, 0, NULL, 0);
 	if (!ret){
 		puts("Name matched regex");
@@ -45,4 +48,6 @@ int main(){
 		fprintf(stderr, "Regex match failed: %s\n", message);
 		exit(1);
 	}
+
+	exit(0);
 }

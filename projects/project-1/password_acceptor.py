@@ -6,7 +6,13 @@ import re
 def check(password):
     """
     Regex adapted from <https://stackoverflow.com/a/21456918/8704864>
+    """
 
+    regex_string = (
+        "^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{14,}$"
+    )
+
+    """
     Explanation:
     - ^ : Start of string
     - (?=.*[A-Z]) : Forward search for A-Z in string
@@ -17,10 +23,7 @@ def check(password):
     - $ : End of string.
     """
 
-    result = re.fullmatch(
-        "^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{14,}$",
-        password,
-    )
+    result = re.fullmatch(regex_string, password,)
     print(f'Password Check: {"Success" if not result ==  None else "Failure"}')
 
 
