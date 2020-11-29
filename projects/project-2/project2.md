@@ -61,6 +61,16 @@ Where `<json_file>` follows the following structure and complies with JSON synta
 }
 ```
 
+$\pagebreak$
+
+## Notes
+
+Because of some bizareness in handling the lambda value, the DPDAs that this program will work through might not work as expected, expecially when compared to JFLAP. I have narrowed this difference down to the difference to be that on an empty string and on an empty state, JFLAP will not take a transition [lambda, Z, lambda], in order to stay at the final state. This functionality has been incorporated into my function, however it results in a function that will inappropriately accept some words. For example, the following DFA will accept input `aaaca`, ignoring the possible transition `[q1, '', 'a', q2, '']` in favor of remaining where it is. 
+
+![DPDA for accepting palindromes with center 'c'](images/dpda_palindrome_acceptor.png){height=300px}
+
+This could be remedied by requiring the DPDA to be accepted based on the stack being empty as opposed to a final state being reached, however that would not make use of the required final states that are passed in the JSON file, and does not appear to be the standard way to accept a DPDA. 
+
 ## Sources Cited
 
 - [1] https://www.quora.com/How-do-you-design-a-PDA-that-accepts-the-complement-of-L-Can-you-make-one-if-L-is-not-a-CFG

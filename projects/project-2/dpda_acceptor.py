@@ -167,7 +167,7 @@ def dpda_run(dpda_dict):
     Returns: Nothing
     """
 
-    word = input("Please input a word to test:")
+    word = input("[>] Please input a word to test:")
     transition_path = []
     stack = ["Z"]
     current_state = dpda_dict["start_state"]
