@@ -11,11 +11,11 @@
 		<state id="2" name="q2">
 			<x>458.0</x>
 			<y>168.0</y>
-			<final/>
 		</state>
 		<state id="3" name="q1">
 			<x>267.0</x>
 			<y>81.0</y>
+			<final/>
 		</state>
 		<!--The list of transitions.-->
 		<transition>
@@ -68,6 +68,20 @@
 			<push>ab</push>
 		</transition>
 		<transition>
+			<from>3</from>
+			<to>2</to>
+			<read>a</read>
+			<pop>Z</pop>
+			<push/>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>2</to>
+			<read>b</read>
+			<pop>Z</pop>
+			<push/>
+		</transition>
+		<transition>
 			<from>0</from>
 			<to>3</to>
 			<read>c</read>
@@ -82,9 +96,9 @@
 			<push>b</push>
 		</transition>
 		<transition>
-			<from>3</from>
+			<from>0</from>
 			<to>2</to>
-			<read/>
+			<read>c</read>
 			<pop>Z</pop>
 			<push>Z</push>
 		</transition>
@@ -96,11 +110,25 @@
 			<push>ba</push>
 		</transition>
 		<transition>
-			<from>0</from>
+			<from>3</from>
+			<to>2</to>
+			<read>b</read>
+			<pop>a</pop>
+			<push/>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>2</to>
+			<read>a</read>
+			<pop>b</pop>
+			<push/>
+		</transition>
+		<transition>
+			<from>3</from>
 			<to>2</to>
 			<read>c</read>
-			<pop>Z</pop>
-			<push>Z</push>
+			<pop/>
+			<push/>
 		</transition>
 	</automaton>
 </structure>

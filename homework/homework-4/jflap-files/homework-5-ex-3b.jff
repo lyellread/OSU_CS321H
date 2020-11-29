@@ -16,7 +16,7 @@
 			<x>202.0</x>
 			<y>224.0</y>
 		</state>
-		<state id="4" name="q4">
+		<state id="4" name="q3">
 			<x>410.0</x>
 			<y>102.0</y>
 			<final/>
@@ -31,9 +31,16 @@
 		</transition>
 		<transition>
 			<from>1</from>
+			<to>2</to>
+			<read>a</read>
+			<pop>b</pop>
+			<push/>
+		</transition>
+		<transition>
+			<from>2</from>
 			<to>1</to>
-			<read>b</read>
-			<pop>a</pop>
+			<read/>
+			<pop>b</pop>
 			<push/>
 		</transition>
 		<transition>
@@ -47,8 +54,22 @@
 			<from>2</from>
 			<to>1</to>
 			<read/>
-			<pop>b</pop>
+			<pop/>
+			<push>a</push>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>b</read>
+			<pop>a</pop>
 			<push/>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>a</read>
+			<pop/>
+			<push>a</push>
 		</transition>
 		<transition>
 			<from>1</from>
@@ -56,27 +77,6 @@
 			<read/>
 			<pop>Z</pop>
 			<push/>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>2</to>
-			<read>a</read>
-			<pop>b</pop>
-			<push/>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>2</to>
-			<read>a</read>
-			<pop/>
-			<push>a</push>
-		</transition>
-		<transition>
-			<from>2</from>
-			<to>1</to>
-			<read/>
-			<pop/>
-			<push>a</push>
 		</transition>
 	</automaton>
 </structure>
