@@ -7,6 +7,15 @@ import sys
 
 def check_parse_file(filename):
 
+    """
+    This function will read from the JSON file, and
+    parse the input. It checks, using assertions, that
+    the DPDA meets certain requirements.
+
+    Arguments: A full path to the JSON to parse
+    Returns: A dictionary containing the parsed JSON DPDA
+    """
+
     with open(filename) as f:
         dpda_dict = json.loads(f.read())
 
@@ -14,6 +23,7 @@ def check_parse_file(filename):
         states = set(dpda_dict["states"])
         start_state = dpda_dict["start_state"]
         final_states = set(dpda_dict["final_states"])
+
     except Exception as exc:
         print(f"[X] Exception raised during JSON Parse: {exc}")
         exit()
@@ -28,11 +38,21 @@ def check_parse_file(filename):
 
 def print_transitions(transitions):
 
+    """
+    Helper to print transitions in special format.
+    """
+
     for x in transitions:
         print(f"\t{x[0]} --[{x[1]}, {x[2]}, {x[4]}]-> {x[3]}")
 
 
 def print_dpda(dpda_dict):
+
+    """
+    Helper to print the transitions and states associated with
+    a DPDA in a readable format.
+    """
+
     print(
         f"""[-] DPDA with:
     States: {set(dpda_dict['states'])}
@@ -45,6 +65,28 @@ def print_dpda(dpda_dict):
 
 def choose_next_state(current_state, character, stack, dpda_dict, transition_path):
 
+    """
+    Chooses what move to make, and makes it.
+
+    This entails filtering the set of all transitions based on the
+    state we are in, the value at the top of the stack and the
+    character we are processing.
+
+    Should we return 2 or more applicable transitions, this will
+    show there is nondeterminism in the PDA, which will generate a
+    failure.
+
+    Should we find no possible transitions, we are in a final
+    state and must decide what to do: accept or reject.
+
+    The rest of the function updates the stack, the trace/path and
+    prepares for the next run.
+
+    Arguments: The current state, the current character, the current stack,
+        dictionary representing the DPDA, the current transition path.
+    Returns: New stack [reference], new transition path [reference], new state.
+    """
+
     possible_transitions = list(
         filter(
             lambda x: x[0] == current_state
@@ -54,7 +96,11 @@ def choose_next_state(current_state, character, stack, dpda_dict, transition_pat
         )
     )
     print(
-        f"[+] Step: \n\tCurrent state {current_state}\n\tCurrent character '{character}'\n\tStack {stack}\n\tFound {possible_transitions}."
+        f"""[+] Step:
+        Current state {current_state}
+        Current character '{character}'
+        Stack {stack}
+        Found {possible_transitions}."""
     )
 
     assert len(possible_transitions) <= 2, "[X] Bad number of transitions found."
@@ -64,9 +110,13 @@ def choose_next_state(current_state, character, stack, dpda_dict, transition_pat
         print_transitions(transition_path)
         return None
 
+    # Add to path
     transition_path.append(possible_transitions[0])
 
+    # Set current state
     current_state = possible_transitions[0][3]
+
+    # Stack Update
     stack.pop()
     stack_topush = list(possible_transitions[0][4])
     stack_topush.reverse()
@@ -77,6 +127,15 @@ def choose_next_state(current_state, character, stack, dpda_dict, transition_pat
 
 def dpda_complement(dpda_dict):
 
+    """
+    Complement a DPDA. If it is a true DPDA, we can set all
+    non terminal states to terminal states, and visa
+    versa. We end up with the complement DPDA.
+
+    Arguments: Dictionary representing the DPDA
+    Returns: Dictionary represetting complement DPDA to passed dictionary
+    """
+
     accepting_states = dpda_dict["final_states"]
     nonaccepting_states = (
         set(dpda_dict["states"])
@@ -85,7 +144,9 @@ def dpda_complement(dpda_dict):
     )
 
     print(
-        f"[-] Generating Complement Acceptor: Swapping:\n\tAccepting States: {{{accepting_states}}}\n\tNonaccepting States: {{{nonaccepting_states}}}"
+        f"""[-] Generating Complement Acceptor: Swapping:
+        Accepting States: {{{accepting_states}}}
+        Nonaccepting States: {{{nonaccepting_states}}}"""
     )
 
     complement_dict = dpda_dict
@@ -97,11 +158,21 @@ def dpda_complement(dpda_dict):
 
 def dpda_run(dpda_dict):
 
+    """
+    Function to seek input and run the DPDA provided.
+    This function iterates over the word until a terminal
+    condition is reached.
+
+    Arguments: Dictionary representing the DPDA
+    Returns: Nothing
+    """
+
     word = input("Please input a word to test:")
     transition_path = []
     stack = ["Z"]
     current_state = dpda_dict["start_state"]
 
+    # Iterate until we are done
     while (not (current_state in dpda_dict["final_states"])) or (word != ""):
 
         character = "" if len(word) == 0 else word[0]
@@ -125,6 +196,10 @@ def dpda_run(dpda_dict):
 
 
 if __name__ == "__main__":
+
+    """
+    Main Function. Reads input file, calls associated functions.
+    """
 
     assert (
         len(sys.argv) == 2
