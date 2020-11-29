@@ -13,7 +13,7 @@
 			<y>168.0</y>
 			<final/>
 		</state>
-		<state id="3" name="q3">
+		<state id="3" name="q1">
 			<x>267.0</x>
 			<y>81.0</y>
 		</state>
@@ -54,13 +54,6 @@
 			<push/>
 		</transition>
 		<transition>
-			<from>3</from>
-			<to>2</to>
-			<read/>
-			<pop>Z</pop>
-			<push>Z</push>
-		</transition>
-		<transition>
 			<from>0</from>
 			<to>0</to>
 			<read>a</read>
@@ -76,13 +69,6 @@
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>0</to>
-			<read>b</read>
-			<pop>a</pop>
-			<push>ba</push>
-		</transition>
-		<transition>
-			<from>0</from>
 			<to>3</to>
 			<read>c</read>
 			<pop>a</pop>
@@ -94,6 +80,20 @@
 			<read>c</read>
 			<pop>b</pop>
 			<push>b</push>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>2</to>
+			<read/>
+			<pop>Z</pop>
+			<push>Z</push>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>b</read>
+			<pop>a</pop>
+			<push>ba</push>
 		</transition>
 		<transition>
 			<from>0</from>
