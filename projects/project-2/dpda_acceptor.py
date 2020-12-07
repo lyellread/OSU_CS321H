@@ -184,7 +184,6 @@ def dpda_run(dpda_dict):
         )
 
         if result_state == None and word == "":
-            print("AAAAA")
             print(f"[=] Terminated at state {current_state}")
             if current_state in dpda_dict["final_states"]:
                 print(f"[=] Result: Accepted with path:")
@@ -194,8 +193,6 @@ def dpda_run(dpda_dict):
                 print_transitions(transition_path)
             return
         elif result_state == None and word != "":
-            print("BBBBB")
-            print(word)
             print(f"[=] Terminated at state {current_state}")
             print(f"[=] Result: Rejected with path:")
             print_transitions(transition_path)
