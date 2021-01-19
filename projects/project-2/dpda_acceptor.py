@@ -90,7 +90,7 @@ def choose_next_state(current_state, character, stack, dpda_dict, transition_pat
     possible_transitions = list(
         filter(
             lambda x: x[0] == current_state
-            and x[1] == character
+            and (x[1] == character or x[1] == "")
             and (stack[-1] == x[2] or x[2] == ""),
             dpda_dict["transition_functions"],
         )
@@ -103,11 +103,11 @@ def choose_next_state(current_state, character, stack, dpda_dict, transition_pat
         Found {possible_transitions}."""
     )
 
-    assert len(possible_transitions) <= 2, "[X] Bad number of transitions found."
+    assert (
+        len(possible_transitions) <= 1
+    ), f"[X] Nondeterminism found on state {current_state}"
 
     if len(possible_transitions) == 0:
-        print(f"[=] Result: Rejected with path:")
-        print_transitions(transition_path)
         return None
 
     # Add to path
@@ -140,7 +140,7 @@ def dpda_complement(dpda_dict):
     nonaccepting_states = (
         set(dpda_dict["states"])
         - set(dpda_dict["final_states"])
-        - {dpda_dict["start_state"]}
+        # - {dpda_dict["start_state"]}
     )
 
     print(
@@ -173,7 +173,7 @@ def dpda_run(dpda_dict):
     current_state = dpda_dict["start_state"]
 
     # Iterate until we are done
-    while (not (current_state in dpda_dict["final_states"])) or (word != ""):
+    while True:
 
         character = "" if len(word) == 0 else word[0]
         if not word == "":
@@ -183,15 +183,23 @@ def dpda_run(dpda_dict):
             current_state, character, stack, dpda_dict, transition_path
         )
 
-        if result_state == None:
+        if result_state == None and word == "":
             print(f"[=] Terminated at state {current_state}")
+            if current_state in dpda_dict["final_states"]:
+                print(f"[=] Result: Accepted with path:")
+                print_transitions(transition_path)
+            else:
+                print(f"[=] Result: Rejected with path:")
+                print_transitions(transition_path)
+            return
+        elif result_state == None and word != "":
+            print(f"[=] Terminated at state {current_state}")
+            print(f"[=] Result: Rejected with path:")
+            print_transitions(transition_path)
             return
         else:
             print(f"[+] Chose next state {current_state}")
             current_state = result_state
-
-    print(f"[=] Result: Accepted with path:")
-    print_transitions(transition_path)
     return
 
 
